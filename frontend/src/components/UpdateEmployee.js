@@ -55,92 +55,85 @@ function UpdateEmployee() {
   };
 
   return (
-    <Box sx={{ padding: 4 }}>
-      <Typography variant="h4" gutterBottom>
+    <Box
+      sx={{
+        padding: 4,
+        fontFamily: 'Arial, sans-serif',
+        backgroundColor: '#f9f9f9',
+        borderRadius: '10px',
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+        maxWidth: 500,
+        margin: '0 auto',
+      }}
+    >
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ color: '#1976d2', fontWeight: 'bold', marginBottom: 3 }}
+      >
         Update Employee
       </Typography>
-      <Paper elevation={3} sx={{ padding: 3 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          padding: 4,
+          backgroundColor: '#ffffff',
+          borderRadius: '10px',
+          boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+        }}
+      >
         <form onSubmit={handleUpdate}>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="First Name"
-              variant="outlined"
-              value={form.first_name}
-              onChange={(e) => setForm({ ...form, first_name: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Last Name"
-              variant="outlined"
-              value={form.last_name}
-              onChange={(e) => setForm({ ...form, last_name: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Email"
-              type="email"
-              variant="outlined"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Position"
-              variant="outlined"
-              value={form.position}
-              onChange={(e) => setForm({ ...form, position: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Salary"
-              type="number"
-              variant="outlined"
-              value={form.salary}
-              onChange={(e) => setForm({ ...form, salary: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Department"
-              variant="outlined"
-              value={form.department}
-              onChange={(e) => setForm({ ...form, department: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ marginBottom: 2 }}>
-            <TextField
-              fullWidth
-              label="Date of Joining"
-              type="date"
-              InputLabelProps={{ shrink: true }}
-              variant="outlined"
-              value={form.date_of_joining}
-              onChange={(e) => setForm({ ...form, date_of_joining: e.target.value })}
-              required
-            />
-          </Box>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            <Button variant="contained" color="success" type="submit">
-              Save
+          {[
+            { label: 'First Name', type: 'text', value: form.first_name, field: 'first_name' },
+            { label: 'Last Name', type: 'text', value: form.last_name, field: 'last_name' },
+            { label: 'Email', type: 'email', value: form.email, field: 'email' },
+            { label: 'Position', type: 'text', value: form.position, field: 'position' },
+            { label: 'Salary', type: 'number', value: form.salary, field: 'salary' },
+            { label: 'Department', type: 'text', value: form.department, field: 'department' },
+            { label: 'Date of Joining', type: 'date', value: form.date_of_joining, field: 'date_of_joining' },
+          ].map((field, index) => (
+            <Box key={index} sx={{ marginBottom: 3 }}>
+              <TextField
+                fullWidth
+                label={field.label}
+                type={field.type}
+                InputLabelProps={field.type === 'date' ? { shrink: true } : undefined}
+                variant="outlined"
+                value={field.value}
+                onChange={(e) => setForm({ ...form, [field.field]: e.target.value })}
+                required
+                sx={{
+                  backgroundColor: '#f9f9f9',
+                  borderRadius: '5px',
+                }}
+              />
+            </Box>
+          ))}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, marginTop: 3 }}>
+            <Button
+              variant="contained"
+              color="success"
+              type="submit"
+              sx={{
+                padding: '10px 20px',
+                fontSize: '16px',
+                textTransform: 'capitalize',
+              }}
+            >
+              💾 Save
             </Button>
-            <Button variant="contained" color="error" onClick={() => navigate('/employees')}>
-              Cancel
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => navigate('/employees')}
+              sx={{
+                padding: '10px 20px',
+                fontSize: '16px',
+                textTransform: 'capitalize',
+              }}
+            >
+              ❌ Cancel
             </Button>
           </Box>
         </form>

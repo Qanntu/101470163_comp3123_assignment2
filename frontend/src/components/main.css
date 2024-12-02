@@ -1,29 +1,49 @@
-html{
-    background-color:rgb(248, 248, 226);
+html {
+    background-color: #e3f2fd;
     margin: 10px;
+    font-family: 'Arial', sans-serif; 
 }
 
 .container {
     height: 100%;
-    font-size: 15px;
+    font-size: 16px; 
     text-align: center;
-    text-justify: center;
-    margin: 50px;
+    margin: 30px;
+    padding: 20px;
+    border: 2px solid #90caf9;
+    border-radius: 10px;
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-.searchbar{
+.searchbar {
     text-align: center;
+    margin-bottom: 20px;
+    color: #1976d2; 
+    font-weight: bold;
 }
 
-.list table{
+.list table {
     float: left;
     width: 100%;
-    padding: auto;
+    padding: 0;
     text-align: center;
-    border: #f5ceed;
+    border: 1px solid #42a5f5; 
+    border-collapse: collapse;
 }
 
-form{
+.list table th, .list table td {
+    padding: 10px;
+    border: 1px solid #bbdefb; 
+    color: #0d47a1; 
+}
+
+form {
     text-align: center;
-    margin: 0 20%;
+    margin: 0 15%;
+    padding: 15px;
+    background-color: #bbdefb; 
+    border: 1px solid #64b5f6;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

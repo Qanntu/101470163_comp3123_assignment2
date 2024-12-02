@@ -1,27 +1,39 @@
 .App {
   text-align: center;
+  background-color: #f5f5f5; /* Fondo más claro para contraste */
+  color: #333; /* Texto más oscuro */
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 10s ease-in-out; /* Animación más suave y lenta */
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1e1f26; /* Fondo oscuro elegante */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(12px + 2vmin); /* Tamaño de fuente ligeramente mayor */
+  color: #e0e0e0; /* Color de texto gris claro */
+  border-bottom: 5px solid #61dafb; /* Línea decorativa en el borde */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ffa726; /* Cambio de color a naranja */
+  font-weight: bold;
+  text-decoration: none; /* Eliminar subrayado */
+  border-bottom: 2px solid transparent; /* Efecto decorativo */
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.App-link:hover {
+  color: #ff7043; /* Color más oscuro al pasar el cursor */
+  border-bottom: 2px solid #ff7043; /* Subrayado decorativo */
 }
 
 @keyframes App-logo-spin {

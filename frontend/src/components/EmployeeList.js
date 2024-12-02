@@ -17,7 +17,7 @@ function EmployeeList() {
   
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/v1/emp/employees', {
+      const response = await axios.get('http://localhost:5000/api/v1/emp', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +41,7 @@ function EmployeeList() {
     const confirmDelete = window.confirm('Are you sure you want to delete this employee?');
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:5000/api/v1/emp/employees`, {
+        await axios.delete(`http://localhost:5000/api/v1/emp`, {
           params: { eid: id },
           headers: {
           Authorization: `Bearer ${token}`,
@@ -81,55 +81,101 @@ function EmployeeList() {
   };
 
   return (
-    <div>
-        <Button variant="contained" color="error" onClick={handleLogout}>Logout</Button>
-        <div class="searchbar">
-            <h3>Search Employees</h3>
-                <TextField
-                label="Search by Department or Position"
-                variant="outlined"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                />
-      <Button variant="contained" color="inherit" onClick={handleSearch}>
-        Search
-      </Button>
-        </div>
+    <div style={{ fontFamily: 'Arial, sans-serif', margin: '20px' }}>
+      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+        <Button variant="contained" color="error" onClick={handleLogout}>
+          Logout
+        </Button>
+      </div>
 
-        <div class="list" >
-        <h1>Employee List</h1>
-        <Button variant="contained" color="success" onClick={() => navigate('/add')}>Add Employee</Button>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Position</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {employees.length > 0 ? (
-            employees.map((employee) => (
-              <TableRow key={employee._id}>
-                <TableCell>{employee._id}</TableCell>
-                <TableCell>{employee.first_name} {employee.last_name}</TableCell>
-                <TableCell>{employee.position}</TableCell>
-                <TableCell>
-                  <Button variant="contained" color="primary" onClick={() => navigate(`/update/${employee._id}`)}>Update</Button>
-                  <Button variant="contained" color="secondary" onClick={() => navigate(`/employee/${employee._id}`)}>View</Button>
-                  <Button variant="contained" color="error" onClick={() => handleDelete(employee._id)}>Delete</Button>
+      <div className="searchbar" style={{ marginBottom: '30px', textAlign: 'center' }}>
+        <h2 style={{ color: '#1976d2' }}>Search Employees</h2>
+        <TextField
+          label="Search by Department or Position"
+          variant="outlined"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          style={{ width: '50%', marginBottom: '10px' }}
+        />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          style={{ padding: '10px 30px', fontSize: '16px' }}
+          onClick={handleSearch}
+        >
+          🔍 Search
+        </Button>
+      </div>
+
+      <div className="list" style={{ padding: '20px', backgroundColor: '#ffffff', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)' }}>
+        <h1 style={{ color: '#1976d2', textAlign: 'center', marginBottom: '20px' }}>Employee List</h1>
+        <Button
+          variant="contained"
+          color="success"
+          size="large"
+          style={{ display: 'block', margin: '20px auto' }}
+          onClick={() => navigate('/add')}
+        >
+          ➕ Add Employee
+        </Button>
+        <Table style={{ backgroundColor: '#f9f9f9', borderRadius: '8px', overflow: 'hidden' }}>
+          <TableHead>
+            <TableRow style={{ backgroundColor: '#1976d2' }}>
+              <TableCell style={{ color: '#ffffff', fontWeight: 'bold' }}>ID</TableCell>
+              <TableCell style={{ color: '#ffffff', fontWeight: 'bold' }}>Name</TableCell>
+              <TableCell style={{ color: '#ffffff', fontWeight: 'bold' }}>Position</TableCell>
+              <TableCell style={{ color: '#ffffff', fontWeight: 'bold' }}>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {employees.length > 0 ? (
+              employees.map((employee) => (
+                <TableRow key={employee._id} style={{ borderBottom: '1px solid #eeeeee' }}>
+                  <TableCell>{employee._id}</TableCell>
+                  <TableCell>{`${employee.first_name} ${employee.last_name}`}</TableCell>
+                  <TableCell>{employee.position}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      style={{ marginRight: '10px' }}
+                      onClick={() => navigate(`/update/${employee._id}`)}
+                    >
+                      ✏️ Update
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      style={{ marginRight: '10px' }}
+                      onClick={() => navigate(`/employee/${employee._id}`)}
+                    >
+                      👁️ View
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      onClick={() => handleDelete(employee._id)}
+                    >
+                      ❌ Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={4} align="center" style={{ color: '#757575', padding: '20px' }}>
+                  No employees found
                 </TableCell>
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={4} align="center">No employees found</TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-        </div>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }
